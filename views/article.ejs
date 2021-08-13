@@ -1,0 +1,206 @@
+
+<!--================Header Menu Area =================-->
+<%- include("./partials/_header.ejs") %>
+<!--================Header Menu Area =================-->
+
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+<div class="box_1620">
+<div class="banner_inner d-flex align-items-center">
+    <div class="container">
+        <div class="banner_content text-center">
+            <h2>Blog Details</h2>
+            <div class="page_link">
+                <a href="./">Home</a>
+                <a href="./blog">Blog</a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area p_120">
+<div class="container">
+<div class="row">
+    <div class="col-lg-8 posts-list">
+        <% if(typeof articleData != "undefined"){ %>
+            <div class="single-post row">
+                <div class="col-lg-12">
+                    <div class="feature-img">
+                        <img class="img-fluid" src="/uploads/<%= articleData.articleImage %>" alt="">
+                    </div>									
+                </div>
+                <div class="col-lg-3  col-md-3">
+                    <div class="blog_info text-right">
+                        <div class="post_tag">
+                            <a class="active" href="#"><%= articleData.articleType.toUpperCase() %></a>
+                        </div>
+                        <ul class="blog_meta list">
+                            <li><a href="#"><%= articleData.reporter %><i class="lnr lnr-user"></i></a></li>
+                            <li><a href="#"><%= articleData.Date.toLocaleDateString() %><i class="lnr lnr-calendar-full"></i></a></li>
+                            <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
+                            <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                        </ul>
+                        <ul class="social-links">
+                            <li><a href="https://www.facebook.com/beingsocasual" target = "_blank"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/beingsocasual" target = "_blank"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://github.com/beingsocasual" target = "_blank"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 blog_details">
+                    <h2><%= articleData.title %></h2>
+                    <p class="excert">
+                        <%=  articleData.fullArticle %>
+                    </p>
+                </div>
+                <div class="col-lg-12">
+                    <div class="quotes">
+                        MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training.										
+                    </div>
+                </div>
+            </div>
+        <% } %>
+        <div class="comments-area">
+            <h4>Comments</h4>
+            <% if(typeof commentData != "undefined"){%>
+            <% commentData.forEach((comment)=>{%>
+
+                <div class="comment-list">
+                    <div class="single-comment justify-content-between d-flex">
+                        <div class="user justify-content-between d-flex">
+                            <div class="desc">
+                                <h5><a href="#"><%= comment.username %></a></h5>
+                                <p class="date"><%= comment.date %></p>
+                                <p class="comment">
+                                    <%= comment.message %>
+
+
+
+                                </p>
+                            </div>
+                        </div>
+                        <div class="reply-btn">
+                                <a href="" class="btn-reply text-uppercase">reply</a> 
+
+                        </div>
+                    </div>
+                </div>	
+            <% }) %>
+            <%}%>
+        </div>
+
+
+        <div class="comment-form">
+            <h4>Leave a Reply</h4>
+            <form method = "post" action = "/blog/<%= articleData._id %>" >
+                <div class="form-group form-inline">
+                    <div class="form-group col-lg-6 col-md-6 name">
+                    <input type="text" name = "username" class="form-control" id="name" placeholder="Enter Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Name'">
+                    </div>
+                    <div class="form-group col-lg-6 col-md-6 email">
+                    <input type="email" name = "email" class="form-control" id="email" placeholder="Enter email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'">
+                    </div>										
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Messege'" required=""></textarea>
+                </div>
+                <button type = "submit" class="primary-btn submit_btn">Post Comment</button>	
+            </form>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="blog_right_sidebar">
+            <aside class="single_sidebar_widget author_widget">
+                <h4>Ashish Prajapati</h4>
+                <p> blog writer</p>
+                <div class="social_icon">
+                    <a href="https://www.facebook.com/beingsocasual" target = "_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://twitter.com/beingsocasual" target = "_blank"><i class="fa fa-twitter"></i></a>
+                    <a href="https://github.com/beingsocasual" target = "_blank"><i class="fa fa-github"></i></a>
+                </div>
+                <p>Boot camps have its supporters andit sdetractors. Some people do not understand why you should have to spend money on boot camp when you can get. Boot camps have itssuppor ters andits detractors.</p>
+                <div class="br"></div>
+            </aside>
+            <aside class="single_sidebar_widget ads_widget">
+                <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
+                <div class="br"></div>
+            </aside>
+            <aside class="single_sidebar_widget post_category_widget">
+                <h4 class="widget_title">Post Catgories</h4>
+                <ul class="list cat-list">
+                    <li>
+                        <a href="/blog/technology" class="d-flex justify-content-between">
+                            <p>Technology</p>
+                            <p>37</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/blog/food" class="d-flex justify-content-between">
+                            <p>Food</p>
+                            <p>24</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/blog/lifestyle" class="d-flex justify-content-between">
+                            <p>Life style</p>
+                            <p>59</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/blog/politics" class="d-flex justify-content-between">
+                            <p>Politics</p>
+                            <p>59</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/blog/sociallife" class="d-flex justify-content-between">
+                            <p>Social Life</p>
+                            <p>59</p>
+                        </a>
+                    </li>
+                </ul>
+                <div class="br"></div>
+            </aside>
+            <aside class="single-sidebar-widget newsletter_widget">
+                <h4 class="widget_title">Newsletter</h4>
+                <p>
+                Here, I focus on a range of items and features that we use in life without
+                giving them a second thought.
+                </p>
+                <div class="form-group d-flex flex-row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Enter email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email'">
+                    </div>
+                    <a href="#" class="bbtns">Subcribe</a>
+                </div>	
+                <p class="text-bottom">You can unsubscribe at any time</p>	
+                <div class="br"></div>							
+            </aside>
+            <aside class="single-sidebar-widget tag_cloud_widget">
+                <h4 class="widget_title">Tag Clouds</h4>
+                <ul class="list">
+                    <li><a href="/blog/technology">Technology</a></li>
+                    <li><a href="/blog/food">Food</a></li>
+                    <li><a href="/blog/lifestyle">Lifestyle</a></li>
+                    <li><a href="/blog/politics">Politics</a></li>
+                    <li><a href="/blog/sociallife">Social life</a></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+<!--================Blog Area =================-->
+
+<!--================Footer Area =================-->
+<%- include("./partials/_footer.ejs") %>
+<!--================End Footer Area =================-->
+
