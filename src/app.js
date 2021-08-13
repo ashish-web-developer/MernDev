@@ -5,6 +5,7 @@ const expressLayouts = require("express-ejs-layouts");
 const Subscriber = require("./models/subscriber");
 const admin = require("./routes/admin");
 require("dotenv").config();
+let port = process.env.PORT || 8000;
 
 // about
 const about = require("./routes/about");
@@ -64,4 +65,4 @@ app.post("/subscribe",function(req,res){
 });
 
 
-app.listen(process.env.PORT,console.log(`listening on port ${process.env.PORT}`));
+app.listen(port,console.log(`listening on port ${port}`));
