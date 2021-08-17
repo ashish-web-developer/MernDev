@@ -4,6 +4,11 @@ const path = require("path");
 const expressLayouts = require("express-ejs-layouts");
 const Subscriber = require("./models/subscriber");
 const admin = require("./routes/admin");
+const session = require("express-session");
+const passport = require("passport");
+const passportInitializer = require("./passport-config");
+const flash = require("connect-flash");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 let port = process.env.PORT || 8000;
 
@@ -36,8 +41,21 @@ app.set("view engine","ejs");
 app.use(expressLayouts);
 
 // setting parser
+passportInitializer(passport);
+app.use(cookieParser());
 app.use(express.json());
+app.use(session({ 
+    secret: process.env.SECRET,
+    resave:false,
+    saveUninitialized:false,
+    cookie:{
+        maxAge:10000*60*60*24
+    }
+}));
 app.use(express.urlencoded({extended:true}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 
 // routes
@@ -62,6 +80,10 @@ app.post("/subscribe",function(req,res){
         console.log(error);
         res.send("got some error");
     });
+});
+
+app.use(function(req,res,next){
+    res.status(404).send("Page doesn't exist");
 });
 
 

@@ -15,8 +15,15 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage: storage })
-
-Router.get("/",function(req,res){
+function authenticate(req,res,next){
+    if(req.isAuthenticated()){
+        next();
+    }else{
+        res.redirect("/admin/login");
+    }
+};
+Router.get("/",authenticate,function(req,res){
+    console.log(req.isAuthenticated());
     res.render("writeArticle")
 });
 
